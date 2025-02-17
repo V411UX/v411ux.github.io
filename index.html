@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Video de fondo en la parte inferior -->
+    <!-- Video de fondo correctamente posicionado -->
     <video autoplay loop muted playsinline id="bg-video">
         <source src="presentaicon.mp4" type="video/mp4">
         Tu navegador no soporta videos en HTML5.
     </video>
 
-    <!-- Lluvia de código griego en azul, verde y amarillo -->
+    <!-- Lluvia de código griego desde el inicio de la página -->
     <canvas id="matrixCanvas"></canvas>
     <script src="matrix.js"></script>
 
@@ -32,9 +32,25 @@
         <h1 class="vallux-title">V411UX</h1>
     </div>
 
+    <!-- Slider de Iconos (ahora antes de los globos) -->
+    <div class="slider-container">
+        <div class="slider">
+            <a href="#"><img src="icons/bash-svgrepo-com.svg" alt="Bash" class="icon-slide"></a>
+            <a href="#"><img src="icons/java-svgrepo-com.svg" alt="Java" class="icon-slide"></a>
+            <a href="#"><img src="icons/kalilinux-svgrepo-com.svg" alt="Kali Linux" class="icon-slide"></a>
+            <a href="#"><img src="icons/docker-svgrepo-com.svg" alt="Docker" class="icon-slide"></a>
+            <a href="#"><img src="icons/python-svgrepo-com.svg" alt="Python" class="icon-slide"></a>
+            <a href="#"><img src="icons/PowerAutomate_scalable.svg" alt="Power Automate" class="icon-slide"></a>
+            <a href="#"><img src="icons/PowerBI_scalable.svg" alt="Power BI" class="icon-slide"></a>
+            <a href="#"><img src="icons/microsoft-svgrepo-com.svg" alt="Microsoft" class="icon-slide"></a>
+            <a href="#"><img src="icons/linux-svgrepo-com.svg" alt="Linux" class="icon-slide"></a>
+        </div>
+    </div>
+
     <!-- Secciones con los globos flotando sobre el video -->
     <div class="content-wrapper">
         <section id="sobre-mi" class="section bubble">
+            <img src="profile.jpg" alt="Foto de Sergio Vallugera" class="profile-pic">
             <h2>Sobre Mí</h2>
             <p>Técnico en Administración de Sistemas | Data Analyst | IT Specialist</p>
             <p>Con experiencia en administración de sistemas, análisis de datos y automatización de procesos.</p>
@@ -56,21 +72,6 @@
         </section>
     </div>
 
-    <!-- Slider de Iconos -->
-    <div class="slider-container">
-        <div class="slider">
-            <a href="#"><img src="icons/bash-svgrepo-com.svg" alt="Bash" class="icon-slide"></a>
-            <a href="#"><img src="icons/java-svgrepo-com.svg" alt="Java" class="icon-slide"></a>
-            <a href="#"><img src="icons/kalilinux-svgrepo-com.svg" alt="Kali Linux" class="icon-slide"></a>
-            <a href="#"><img src="icons/docker-svgrepo-com.svg" alt="Docker" class="icon-slide"></a>
-            <a href="#"><img src="icons/python-svgrepo-com.svg" alt="Python" class="icon-slide"></a>
-            <a href="#"><img src="icons/PowerAutomate_scalable.svg" alt="Power Automate" class="icon-slide"></a>
-            <a href="#"><img src="icons/PowerBI_scalable.svg" alt="Power BI" class="icon-slide"></a>
-            <a href="#"><img src="icons/microsoft-svgrepo-com.svg" alt="Microsoft" class="icon-slide"></a>
-            <a href="#"><img src="icons/linux-svgrepo-com.svg" alt="Linux" class="icon-slide"></a>
-        </div>
-    </div>
-
     <script>
         document.querySelectorAll('.nav-link').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -83,4 +84,3 @@
     </script>
 </body>
 </html>
-
