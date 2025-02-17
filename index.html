@@ -11,13 +11,13 @@
     <canvas id="matrixCanvas"></canvas>
     <script src="matrix.js"></script>
 
-    <!-- Navegación -->
+    <!-- Navegación con desplazamiento suave -->
     <nav>
         <ul>
-            <li><span>👋</span> <a href="#sobre-mi">Sobre Mí</a></li>
-            <li><a href="#docencia">Docencia</a></li>
-            <li><a href="#programacion">Programación</a></li>
-            <li><a href="#ciberseguridad">Ciberseguridad</a></li>
+            <li><a href="#sobre-mi" class="nav-link">Sobre Mí</a></li>
+            <li><a href="#docencia" class="nav-link">Docencia</a></li>
+            <li><a href="#programacion" class="nav-link">Programación</a></li>
+            <li><a href="#ciberseguridad" class="nav-link">Ciberseguridad</a></li>
         </ul>
     </nav>
 
@@ -26,83 +26,54 @@
         <h1 class="vallux-title">V411UX</h1>
     </div>
 
-    <!-- Sección Presentación -->
-    <section id="sobre-mi" class="section">
+    <!-- Sección Presentación en un globo -->
+    <section id="sobre-mi" class="section bubble">
         <div class="content">
             <img src="profile.jpg" alt="Foto de Sergio Vallugera" class="profile-pic">
             <div class="text">
                 <h2>Sobre Mí</h2>
                 <p>Técnico en Administración de Sistemas | Data Analyst | IT Specialist</p>
-                <p>Con experiencia en administración de sistemas, análisis de datos y automatización de procesos. He trabajado en entornos industriales y tecnológicos, optimizando infraestructuras, desarrollando soluciones de automatización y mejorando la seguridad informática.</p>
-                <p>Apasionado por la ciberseguridad, la gestión de datos y la mejora continua de procesos.</p>
+                <p>Con experiencia en administración de sistemas, análisis de datos y automatización de procesos.</p>
             </div>
         </div>
     </section>
 
-    <!-- Sección Docencia -->
-    <section id="docencia" class="section">
+    <!-- Sección Docencia en un globo -->
+    <section id="docencia" class="section bubble">
         <h2>Docencia</h2>
-        <p>He desarrollado materiales y guías para la formación en sistemas, redes y ciberseguridad. Además, tengo experiencia en la transmisión de conocimientos técnicos a equipos de trabajo.</p>
-        <p>Mis áreas clave de enseñanza incluyen:</p>
-        <ul>
-            <li>Administración de sistemas Linux y Windows.</li>
-            <li>Seguridad informática y auditoría de redes.</li>
-            <li>Automatización con Power Automate y scripting en Python.</li>
-            <li>Uso avanzado de herramientas de monitorización como Grafana y Prometheus.</li>
-        </ul>
+        <p>He desarrollado materiales y guías para la formación en sistemas, redes y ciberseguridad.</p>
     </section>
 
-    <!-- Sección Programación -->
-    <section id="programacion" class="section">
+    <!-- Sección Programación en un globo -->
+    <section id="programacion" class="section bubble">
         <h2>Programación</h2>
-        <p>Prefiero la programación práctica sobre las matemáticas avanzadas. Me especializo en:</p>
-        <ul>
-            <li>Desarrollo de automatizaciones con <b>Power Automate</b> y <b>Power BI</b>.</li>
-            <li>Programación en <b>Python</b>, <b>PowerShell</b> y <b>SQL</b>.</li>
-            <li>Desarrollo web con <b>HTML, CSS y JavaScript</b>.</li>
-            <li>Creación de scripts para administración de servidores y seguridad.</li>
-            <li>Proyectos en <b>Android Studio</b> relacionados con pruebas de conectividad y seguridad.</li>
-        </ul>
+        <p>Especializado en automatización, desarrollo web y scripts en Python y PowerShell.</p>
     </section>
 
-    <!-- Sección Ciberseguridad -->
-    <section id="ciberseguridad" class="section">
+    <!-- Sección Ciberseguridad en un globo -->
+    <section id="ciberseguridad" class="section bubble">
         <h2>Ciberseguridad</h2>
-        <p>Explorando activamente el mundo de la seguridad informática a través de laboratorios y pruebas en entornos controlados.</p>
-        <p>Áreas en las que tengo experiencia:</p>
-        <ul>
-            <li>Análisis de vulnerabilidades y pruebas de penetración.</li>
-            <li>Monitorización de redes y detección de anomalías con herramientas como Prometheus y Grafana.</li>
-            <li>Seguridad en sistemas Linux y Windows.</li>
-            <li>Automatización de auditorías de seguridad con scripts personalizados.</li>
-        </ul>
+        <p>Explorando activamente el mundo de la seguridad informática.</p>
     </section>
 
     <!-- Slider de Iconos -->
     <div class="slider-container">
-      <div class="slider">
-         <a href="https://www.youtube.com/watch?v=EXAMPLE1" target="_blank">
-            <img src="icons/bash-svgrepo-com.svg" alt="Bash" class="icon-slide">
-         </a>
-         <a href="https://www.youtube.com/watch?v=EXAMPLE2" target="_blank">
-            <img src="icons/java-svgrepo-com.svg" alt="Java" class="icon-slide">
-         </a>
-         <a href="https://www.youtube.com/watch?v=EXAMPLE3" target="_blank">
-            <img src="icons/kalilinux-svgrepo-com.svg" alt="Kali Linux" class="icon-slide">
-         </a>
-         <a href="https://www.youtube.com/watch?v=EXAMPLE4" target="_blank">
-            <img src="icons/docker-svgrepo-com.svg" alt="Docker" class="icon-slide">
-         </a>
-         <a href="https://www.youtube.com/watch?v=EXAMPLE5" target="_blank">
-            <img src="icons/python-svgrepo-com.svg" alt="Python" class="icon-slide">
-         </a>
-         <a href="https://www.youtube.com/watch?v=EXAMPLE6" target="_blank">
-            <img src="icons/PowerAutomate_scalable.svg" alt="Power Automate" class="icon-slide">
-         </a>
-         <a href="https://www.youtube.com/watch?v=EXAMPLE7" target="_blank">
-            <img src="icons/PowerBI_scalable.svg" alt="Power BI" class="icon-slide">
-        </a>
-      </div>
+        <div class="slider">
+            <a href="#"><img src="icons/bash-svgrepo-com.svg" alt="Bash" class="icon-slide"></a>
+            <a href="#"><img src="icons/java-svgrepo-com.svg" alt="Java" class="icon-slide"></a>
+            <a href="#"><img src="icons/kalilinux-svgrepo-com.svg" alt="Kali Linux" class="icon-slide"></a>
+        </div>
     </div>
+
+    <script>
+        document.querySelectorAll('.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
