@@ -7,12 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Video de fondo correctamente posicionado -->
-    <video autoplay loop muted playsinline id="bg-video">
-        <source src="presentaicon.mp4" type="video/mp4">
-        Tu navegador no soporta videos en HTML5.
-    </video>
-
     <!-- Lluvia de código griego desde el inicio de la página -->
     <canvas id="matrixCanvas"></canvas>
     <script src="matrix.js"></script>
@@ -32,7 +26,19 @@
         <h1 class="vallux-title">V411UX</h1>
     </div>
 
-    <!-- Slider de Iconos (ahora antes de los globos) -->
+    <!-- Sección Presentación con foto a la izquierda -->
+    <section id="sobre-mi" class="section">
+        <div class="content">
+            <img src="profile.jpg" alt="Foto de Sergio Vallugera" class="profile-pic">
+            <div class="text">
+                <h2>Sobre Mí</h2>
+                <p>Administrador de Sistemas y Redes | Ingeniero Informático</p>
+                <p>Apasionado por la ciberseguridad, la tecnología y la innovación.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slider de Iconos (justo debajo de la presentación) -->
     <div class="slider-container">
         <div class="slider">
             <a href="#"><img src="icons/bash-svgrepo-com.svg" alt="Bash" class="icon-slide"></a>
@@ -47,15 +53,14 @@
         </div>
     </div>
 
+    <!-- Video de fondo colocado después del slider -->
+    <video autoplay loop muted playsinline id="bg-video">
+        <source src="presentaicon.mp4" type="video/mp4">
+        Tu navegador no soporta videos en HTML5.
+    </video>
+
     <!-- Secciones con los globos flotando sobre el video -->
     <div class="content-wrapper">
-        <section id="sobre-mi" class="section bubble">
-            <img src="profile.jpg" alt="Foto de Sergio Vallugera" class="profile-pic">
-            <h2>Sobre Mí</h2>
-            <p>Técnico en Administración de Sistemas | Data Analyst | IT Specialist</p>
-            <p>Con experiencia en administración de sistemas, análisis de datos y automatización de procesos.</p>
-        </section>
-    
         <section id="docencia" class="section bubble">
             <h2>Docencia</h2>
             <p>He desarrollado materiales y guías para la formación en sistemas, redes y ciberseguridad.</p>
