@@ -4,27 +4,33 @@ const ctx = canvas.getContext("2d");
 
 // Ajustar tamaño del canvas
 function resizeCanvas() {
-    canvas.width = window.innerWidth || 800;
+    canvas.width = window.innerWidth || 800; // Valor por defecto si window.innerWidth falla
     canvas.height = window.innerHeight || 600;
 }
 
-resizeCanvas();
+resizeCanvas(); // Llamar antes de calcular columnas
 
-// Definir caracteres griegos y colores
 const greekLetters = "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ".split("");
 const fontSize = 20;
-const columns = Math.max(1, Math.floor(canvas.width / fontSize));
+const columns = Math.max(1, Math.floor(canvas.width / fontSize)); // Evitar 0 o valores negativos
 const drops = Array(columns).fill(1);
 
-// Definir proporciones de colores
 function getRandomColor() {
-    const random = Math.random();
-    if (random < 0.60) return "#00aaff"; // 60% Azul
-    if (random < 0.80) return "#00ff00"; // 20% Verde
-    return "#ffff00"; // 10% Amarillo
+    const colors = ["#00aaff", "#00ff00", "#ffcc00"]; // Azul, Verde, Amarillo
+    const probabilities = [0.6, 0.3, 0.1]; // 60% Azul, 30% Verde, 10% Amarillo
+
+    let rand = Math.random();
+    let cumulative = 0;
+    
+    for (let i = 0; i < colors.length; i++) {
+        cumulative += probabilities[i];
+        if (rand <= cumulative) {
+            return colors[i];
+        }
+    }
+    return colors[0]; // Fallback
 }
 
-// Dibujar la lluvia
 function drawMatrix() {
     ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -33,7 +39,7 @@ function drawMatrix() {
 
     for (let i = 0; i < drops.length; i++) {
         const text = greekLetters[Math.floor(Math.random() * greekLetters.length)];
-        ctx.fillStyle = getRandomColor();
+        ctx.fillStyle = getRandomColor(); // Color aleatorio basado en probabilidades
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
@@ -46,6 +52,7 @@ function drawMatrix() {
 
 setInterval(drawMatrix, 50);
 
+// Ajustar tamaño cuando se redimensiona la pantalla
 window.addEventListener("resize", () => {
     resizeCanvas();
 });
