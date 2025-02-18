@@ -26,12 +26,10 @@ p {
     margin-top: 50px;
 }
 
-/* Parte de la foto y sobre mí */
+/* Foto con círculo azul eléctrico */
 #sobre-mi {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 20px;
     margin-top: 30px;
 }
 
@@ -39,11 +37,19 @@ p {
     width: 150px; /* Ajuste de tamaño */
     height: 150px;
     border-radius: 50%;
-    border: 3px solid white;
+    border: 5px solid #00aaff; /* Círculo azul eléctrico */
 }
 
-.text {
-    max-width: 500px;
+/* Estilo del globo "Sobre mí" */
+.bubble {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
 }
 
 /* Navegación con la mano */
@@ -98,49 +104,4 @@ nav ul li a {
 /* Efecto de desplazamiento para el slider */
 .slider:hover {
     transform: translateX(-50px); /* Desplazamiento del slider */
-}
-
-/* Video de fondo */
-#bg-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    display: block;
-}
-
-/* Separar las secciones flotando sobre el video */
-.content-wrapper {
-    position: relative;
-    z-index: 1; /* Asegura que el contenido esté por encima del video */
-    padding: 50px;
-    text-align: center;
-    margin-top: 20px; /* Añadir un pequeño espacio entre los elementos */
-}
-
-/* Estilo para las secciones de contenido */
-.section {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    margin: 10px auto;
-    width: 80%;  /* Cambiar de 50% a 80% para usar más espacio en pantallas grandes */
-    max-width: 600px;  /* Asegura que no se estiren demasiado */
-    border-radius: 10px;
-    color: white;
-    font-size: 18px;
-}
-
-/* Estilo de los globos */
-.bubble {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    border-radius: 15px;
-    color: white;
-    max-width: 600px;
-    margin: 50px auto;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
 }
