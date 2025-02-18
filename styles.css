@@ -43,7 +43,7 @@ p {
     z-index: 1; /* Asegura que el contenido esté por encima del video */
     padding: 50px;
     text-align: center;
-    margin-top: 0;
+    margin-top: 20px; /* Añadir un pequeño espacio entre los elementos */
 }
 
 /* Estilo para las secciones de contenido */
@@ -51,10 +51,19 @@ p {
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     margin: 10px auto;
-    width: 50%;
+    width: 80%;  /* Cambiar de 50% a 80% para usar más espacio en pantallas grandes */
+    max-width: 600px;  /* Asegura que no se estiren demasiado */
     border-radius: 10px;
     color: white;
     font-size: 18px;
+}
+
+/* Ajustar la imagen del perfil */
+.profile-pic {
+    width: 150px; /* Reducir el tamaño para que se ajuste bien */
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid white;
 }
 
 /* Ajustes para la navegación */
@@ -65,7 +74,6 @@ nav {
     z-index: 10; /* Asegura que el menú de navegación esté visible */
 }
 
-/* Estilos adicionales */
 nav ul {
     list-style: none;
     padding: 0;
@@ -84,6 +92,11 @@ nav ul li a {
     font-weight: bold;
 }
 
+/* Ajustar la animación del slider */
+.slider-container {
+    margin-top: 30px; /* Añadir espacio entre el slider y el contenido */
+}
+
 /* Estilo de los globos */
 .bubble {
     background: rgba(0, 0, 0, 0.8);
@@ -94,4 +107,10 @@ nav ul li a {
     margin: 50px auto;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+}
+
+/* Ajustar la animación de los iconos */
+.icon-slide {
+    width: 50px; /* Ajusta el tamaño de los iconos */
+    margin: 0 10px;
 }
