@@ -46,6 +46,31 @@ p {
     max-width: 500px;
 }
 
+/* Navegación con la mano */
+nav {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+    font-size: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
 /* Slider de iconos */
 .slider-container {
     margin-top: 30px; /* Añadir espacio entre el slider y el contenido */
