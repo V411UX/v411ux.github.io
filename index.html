@@ -7,28 +7,10 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Lluvia de código griego desde el inicio de la página -->
-    <canvas id="matrixCanvas"></canvas>
-    <script src="matrix.js"></script>
-
-    <!-- Navegación con icono de mano -->
-    <nav>
-        <ul>
-            <li><span class="hand-icon">👋</span> <a href="#sobre-mi" class="nav-link">Sobre Mí</a></li>
-            <li><a href="#docencia" class="nav-link">Docencia</a></li>
-            <li><a href="#programacion" class="nav-link">Programación</a></li>
-            <li><a href="#ciberseguridad" class="nav-link">Ciberseguridad</a></li>
-        </ul>
-    </nav>
-
-    <!-- "V411UX" en Azul con efecto -->
+    <!-- Título y sobre mí -->
     <div id="intro">
         <h1 class="vallux-title">V411UX</h1>
-    </div>
-
-    <!-- Sección Presentación con foto a la izquierda -->
-    <section id="sobre-mi" class="section">
-        <div class="content">
+        <div id="sobre-mi">
             <img src="profile.jpg" alt="Foto de Sergio Vallugera" class="profile-pic">
             <div class="text">
                 <h2>Sobre Mí</h2>
@@ -36,28 +18,42 @@
                 <p>Apasionado por la ciberseguridad, la tecnología y la innovación.</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Slider de Iconos (justo debajo de la presentación) -->
+    <!-- Slider de Iconos -->
     <div class="slider-container">
         <div class="slider">
-            <a href="#"><img src="icons/bash-svgrepo-com.svg" alt="Bash" class="icon-slide"></a>
-            <a href="#"><img src="icons/java-svgrepo-com.svg" alt="Java" class="icon-slide"></a>
-            <a href="#"><img src="icons/kalilinux-svgrepo-com.svg" alt="Kali Linux" class="icon-slide"></a>
-            <a href="#"><img src="icons/docker-svgrepo-com.svg" alt="Docker" class="icon-slide"></a>
-            <a href="#"><img src="icons/python-svgrepo-com.svg" alt="Python" class="icon-slide"></a>
-            <a href="#"><img src="icons/PowerAutomate_scalable.svg" alt="Power Automate" class="icon-slide"></a>
-            <a href="#"><img src="icons/PowerBI_scalable.svg" alt="Power BI" class="icon-slide"></a>
-            <a href="#"><img src="icons/microsoft-svgrepo-com.svg" alt="Microsoft" class="icon-slide"></a>
-            <a href="#"><img src="icons/linux-svgrepo-com.svg" alt="Linux" class="icon-slide"></a>
+            <a href="https://www.youtube.com/watch?v=EXAMPLE1" target="_blank">
+                <img src="icons/bash-svgrepo-com.svg" alt="Bash" class="icon-slide">
+            </a>
+            <a href="https://www.youtube.com/watch?v=EXAMPLE2" target="_blank">
+                <img src="icons/java-svgrepo-com.svg" alt="Java" class="icon-slide">
+            </a>
+            <a href="https://www.youtube.com/watch?v=EXAMPLE3" target="_blank">
+                <img src="icons/kalilinux-svgrepo-com.svg" alt="Kali Linux" class="icon-slide">
+            </a>
+            <a href="https://www.youtube.com/watch?v=EXAMPLE4" target="_blank">
+                <img src="icons/docker-svgrepo-com.svg" alt="Docker" class="icon-slide">
+            </a>
+            <a href="https://www.youtube.com/watch?v=EXAMPLE5" target="_blank">
+                <img src="icons/python-svgrepo-com.svg" alt="Python" class="icon-slide">
+            </a>
+            <a href="https://www.youtube.com/watch?v=EXAMPLE6" target="_blank">
+                <img src="icons/PowerAutomate_scalable.svg" alt="Power Automate" class="icon-slide">
+            </a>
+            <a href="https://www.youtube.com/watch?v=EXAMPLE7" target="_blank">
+                <img src="icons/PowerBI_scalable.svg" alt="Power BI" class="icon-slide">
+            </a>
         </div>
     </div>
 
-    <!-- Video de fondo colocado después del slider -->
-    <video autoplay loop muted playsinline id="bg-video">
-        <source src="presentaicon.mp4" type="video/mp4">
-        Tu navegador no soporta videos en HTML5.
-    </video>
+    <!-- Video de fondo -->
+    <div class="video-container">
+        <video autoplay loop muted playsinline id="bg-video">
+            <source src="presentacion.mp4" type="video/mp4">
+            Tu navegador no soporta videos en HTML5.
+        </video>
+    </div>
 
     <!-- Secciones con los globos flotando sobre el video -->
     <div class="content-wrapper">
@@ -77,15 +73,5 @@
         </section>
     </div>
 
-    <script>
-        document.querySelectorAll('.nav-link').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
 </body>
 </html>
