@@ -1,27 +1,81 @@
-/* Ajustes generales */
+/* General */
 body {
-    font-family: 'VT323', monospace;
-    background-color: black;
-    color: white;
+    font-family: Arial, sans-serif;
     text-align: center;
+    background-color: #111;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
 }
 
-/* Navegación */
+h1 {
+    font-size: 3rem;
+    padding: 0;
+}
+
+p {
+    font-size: 1.2rem;
+}
+
+/* Ajuste para el contenedor del video */
+.video-container {
+    position: relative;
+    width: 100%;
+    max-height: 500px;
+    overflow: hidden;
+}
+
+/* Estilos para el video de fondo */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Asegura que el video cubra todo el fondo */
+    object-fit: cover; /* Asegura que el video se ajuste correctamente */
+    z-index: -1; /* Asegura que el video esté en el fondo */
+    display: block;
+}
+
+/* Ajustes para las secciones flotando sobre el video */
+.content-wrapper {
+    position: relative;
+    z-index: 1; /* Asegura que el contenido esté por encima del video */
+    padding: 50px;
+    text-align: center;
+    margin-top: 0;
+}
+
+/* Estilo para las secciones de contenido */
+.section {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    margin: 10px auto;
+    width: 50%;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+}
+
+/* Ajustes para la navegación */
 nav {
     position: absolute;
-    top: 10px;
+    top: 20px;
     left: 20px;
+    z-index: 10; /* Asegura que el menú de navegación esté visible */
 }
 
+/* Estilos adicionales */
 nav ul {
     list-style: none;
     padding: 0;
-    margin: 0;
     display: flex;
+    gap: 20px;
 }
 
 nav ul li {
-    margin: 0 15px;
+    display: inline;
+    font-size: 20px;
 }
 
 nav ul li a {
@@ -30,101 +84,7 @@ nav ul li a {
     font-weight: bold;
 }
 
-/* Título V411UX */
-.vallux-title {
-    font-size: 120px;
-    color: #00aaff;
-    text-shadow: 0px 0px 20px #00aaff;
-    font-weight: bold;
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-/* Sección "Sobre Mí" */
-.section {
-    background-color: #1a1a1a;
-    padding: 50px;
-    margin-top: -450px; /* Ajustado para subir la sección */
-}
-
-/* Contenido centrado */
-.content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Imagen de perfil con círculo */
-.profile-pic {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    border: 5px solid #00aaff;
-    margin-right: 20px;
-    display: block;
-    box-shadow: 0px 0px 15px #00aaff;
-    position: relative;
-    padding: 5px; /* Ajuste del espaciado */
-    background: black; /* Asegura que el fondo del círculo se vea bien */
-}
-
-/* Estilos del texto de la sección "Sobre Mí" */
-.text h2 {
-    font-size: 28px;
-    color: #00aaff;
-}
-
-.text p {
-    font-size: 20px;
-}
-
-/* Ajustar ancho del slider */
-.slider-container {
-    width: 100%; /* Ancho total */
-    padding: 30px 0;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-/* Contenedor del slider */
-.slider {
-    display: flex;
-    gap: 50px;
-    animation: scroll 12s linear infinite;
-    white-space: nowrap;
-}
-
-/* Iconos del slider */
-.icon-slide {
-    width: 80px;
-    height: 80px;
-    transition: transform 0.3s ease-in-out;
-}
-
-/* Efecto de agrandamiento al pasar el cursor */
-.icon-slide:hover {
-    transform: scale(1.5);
-}
-
-/* Animación de desplazamiento */
-@keyframes scroll {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(-100%);
-    }
-}
-html {
-    scroll-behavior: smooth;
-}
-
+/* Estilo de los globos */
 .bubble {
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
