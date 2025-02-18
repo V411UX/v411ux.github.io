@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>V411UX</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Lluvia de código griego en azul, verde y amarillo -->
+    <!-- Lluvia de código griego desde el inicio de la página -->
     <canvas id="matrixCanvas"></canvas>
     <script src="matrix.js"></script>
 
-    <!-- Navegación -->
+    <!-- Navegación con icono de mano -->
     <nav>
         <ul>
-            <li><span>🔥</span> <a href="#sobre-mi">Sobre Mí</a></li>
-            <li><a href="#docencia">Docencia</a></li>
-            <li><a href="#programacion">Programación</a></li>
-            <li><a href="#ciberseguridad">Ciberseguridad</a></li>
+            <li><span class="hand-icon">👋</span> <a href="#sobre-mi" class="nav-link">Sobre Mí</a></li>
+            <li><a href="#docencia" class="nav-link">Docencia</a></li>
+            <li><a href="#programacion" class="nav-link">Programación</a></li>
+            <li><a href="#ciberseguridad" class="nav-link">Ciberseguridad</a></li>
         </ul>
     </nav>
 
@@ -26,7 +26,7 @@
         <h1 class="vallux-title">V411UX</h1>
     </div>
 
-    <!-- Sección Presentación -->
+    <!-- Sección Presentación con foto a la izquierda -->
     <section id="sobre-mi" class="section">
         <div class="content">
             <img src="profile.jpg" alt="Foto de Sergio Vallugera" class="profile-pic">
@@ -38,28 +38,26 @@
         </div>
     </section>
 
-    <!-- Slider de Iconos -->
+    <!-- Slider de Iconos (justo debajo de la presentación) -->
     <div class="slider-container">
-      <div class="slider">
-         <a href="#"><img src="icons/bash-svgrepo-com.svg" alt="Bash" class="icon-slide"></a>
-         <a href="#"><img src="icons/java-svgrepo-com.svg" alt="Java" class="icon-slide"></a>
-         <a href="#"><img src="icons/kalilinux-svgrepo-com.svg" alt="Kali Linux" class="icon-slide"></a>
-         <a href="#"><img src="icons/docker-svgrepo-com.svg" alt="Docker" class="icon-slide"></a>
-         <a href="#"><img src="icons/python-svgrepo-com.svg" alt="Python" class="icon-slide"></a>
-         <a href="#"><img src="icons/PowerAutomate_scalable.svg" alt="Power Automate" class="icon-slide"></a>
-         <a href="#"><img src="icons/PowerBI_scalable.svg" alt="Power BI" class="icon-slide"></a>
-         <a href="#"><img src="icons/microsoft-svgrepo-com.svg" alt="Microsoft" class="icon-slide"></a>
-         <a href="#"><img src="icons/linux-svgrepo-com.svg" alt="Linux" class="icon-slide"></a>
-      </div>
+        <div class="slider">
+            <a href="#"><img src="icons/bash-svgrepo-com.svg" alt="Bash" class="icon-slide"></a>
+            <a href="#"><img src="icons/java-svgrepo-com.svg" alt="Java" class="icon-slide"></a>
+            <a href="#"><img src="icons/kalilinux-svgrepo-com.svg" alt="Kali Linux" class="icon-slide"></a>
+            <a href="#"><img src="icons/docker-svgrepo-com.svg" alt="Docker" class="icon-slide"></a>
+            <a href="#"><img src="icons/python-svgrepo-com.svg" alt="Python" class="icon-slide"></a>
+            <a href="#"><img src="icons/PowerAutomate_scalable.svg" alt="Power Automate" class="icon-slide"></a>
+            <a href="#"><img src="icons/PowerBI_scalable.svg" alt="Power BI" class="icon-slide"></a>
+            <a href="#"><img src="icons/microsoft-svgrepo-com.svg" alt="Microsoft" class="icon-slide"></a>
+            <a href="#"><img src="icons/linux-svgrepo-com.svg" alt="Linux" class="icon-slide"></a>
+        </div>
     </div>
 
-    <!-- Video de fondo debajo del slider -->
-    <div class="video-container">
-        <video autoplay loop muted playsinline id="bg-video">
-            <source src="presentacion.mp4" type="video/mp4">
-            Tu navegador no soporta videos en HTML5.
-        </video>
-    </div>
+    <!-- Video de fondo colocado después del slider -->
+    <video autoplay loop muted playsinline id="bg-video">
+        <source src="presentaicon.mp4" type="video/mp4">
+        Tu navegador no soporta videos en HTML5.
+    </video>
 
     <!-- Secciones con los globos flotando sobre el video -->
     <div class="content-wrapper">
@@ -67,17 +65,27 @@
             <h2>Docencia</h2>
             <p>He desarrollado materiales y guías para la formación en sistemas, redes y ciberseguridad.</p>
         </section>
-
+    
         <section id="programacion" class="section bubble">
             <h2>Programación</h2>
             <p>Especializado en automatización, desarrollo web y scripts en Python y PowerShell.</p>
         </section>
-
+    
         <section id="ciberseguridad" class="section bubble">
             <h2>Ciberseguridad</h2>
-            <p>Explorando activamente el mundo de la seguridad informática a través de laboratorios y pruebas en entornos controlados.</p>
+            <p>Explorando activamente el mundo de la seguridad informática.</p>
         </section>
     </div>
 
+    <script>
+        document.querySelectorAll('.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
