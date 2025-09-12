@@ -6,6 +6,41 @@
     <title>V411UX</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+    <!-- Añade esto justo antes de </body> -->
+<a href="mailto:tucorreo@ejemplo.com?subject=Oferta%20de%20Trabajo%20-%20V411UX&body=Hola%20Sergio,%0A%0AMe%20encant%C3%B3%20tu%20portafolio%20interactivo.%20Estoy%20buscando%20un%20administrador%20de%20sistemas%20y%20especialista%20en%20ciberseguridad%20como%20t%C3%BA.%20¿Podemos%20hablar?" 
+   target="_blank"
+   style="
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 50px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(110, 142, 251, 0.4);
+    z-index: 1000;
+    animation: pulse 2s infinite;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  "
+  onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 12px 30px rgba(110, 142, 251, 0.6)';"
+  onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 20px rgba(110, 142, 251, 0.4)';"
+>
+  💼 Quiero trabajar contigo
+</a>
+
+<style>
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+</style>
 <body>
     <!-- Lluvia de código griego desde el inicio de la página -->
     <canvas id="matrixCanvas"></canvas>
