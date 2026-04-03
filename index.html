@@ -1,132 +1,737 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V411UX</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V411UX — Sergio Vallugera</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green: #00ff41;
+    --cyan: #00eeff;
+    --blue: #00aaff;
+    --red: #ff003c;
+    --dim: #444;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Share Tech Mono', 'VT323', monospace;
+    background: #000;
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  /* ── CANVAS ── */
+  #matrixCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    opacity: 0.13;
+    pointer-events: none;
+  }
+  #starsCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* scanlines CRT */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0,0,0,0.04) 3px,
+      rgba(0,0,0,0.04) 4px
+    );
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem 2rem;
+    background: rgba(0,0,0,0.85);
+    border-bottom: 1px solid #00ff4122;
+    backdrop-filter: blur(6px);
+  }
+  nav a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--green); }
+  .hand-icon { font-size: 14px; }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    z-index: 5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .glitch-title {
+    font-family: 'VT323', monospace;
+    font-size: clamp(4rem, 14vw, 9rem);
+    color: var(--green);
+    letter-spacing: 0.15em;
+    position: relative;
+    line-height: 1;
+    animation: glitch-base 4s infinite;
+  }
+  .glitch-title::before,
+  .glitch-title::after {
+    content: 'V411UX';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+  }
+  .glitch-title::before {
+    color: var(--red);
+    animation: glitch-a 4s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 38%, 0 38%);
+  }
+  .glitch-title::after {
+    color: var(--cyan);
+    animation: glitch-b 4s infinite;
+    clip-path: polygon(0 62%, 100% 62%, 100% 100%, 0 100%);
+  }
+  @keyframes glitch-base {
+    0%,88%,100% { transform: translate(0); }
+    90% { transform: translate(-2px, 1px); }
+    92% { transform: translate(2px, -1px); }
+    94% { transform: translate(-1px, 2px); }
+  }
+  @keyframes glitch-a {
+    0%,88%,100% { transform: translate(0); opacity: 0; }
+    90% { transform: translate(-5px, 0); opacity: 1; }
+    94% { transform: translate(5px, 0); opacity: 1; }
+    96% { opacity: 0; }
+  }
+  @keyframes glitch-b {
+    0%,88%,100% { transform: translate(0); opacity: 0; }
+    91% { transform: translate(5px, 0); opacity: 1; }
+    95% { transform: translate(-5px, 0); opacity: 1; }
+    97% { opacity: 0; }
+  }
+
+  .tagline {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: #555;
+    text-transform: uppercase;
+    margin-top: 1rem;
+  }
+  .tagline em { color: var(--green); font-style: normal; }
+
+  /* foto */
+  .profile-wrap {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 2.5rem auto 1.5rem;
+  }
+  .profile-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: var(--green);
+    border-right-color: var(--cyan);
+    animation: spin 3s linear infinite;
+  }
+  .profile-wrap::after {
+    content: '';
+    position: absolute;
+    inset: -16px;
+    border-radius: 50%;
+    border: 1px solid #00ff4118;
+    border-bottom-color: #ff003c33;
+    animation: spin 7s linear infinite reverse;
+  }
+  .profile-wrap img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00ff4133;
+    filter: saturate(0.7) contrast(1.15);
+    display: block;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* badges */
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 1.5rem auto;
+    max-width: 700px;
+  }
+  .badge {
+    padding: 3px 12px;
+    border: 1px solid #00ff4133;
+    color: var(--green);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: #00ff4108;
+    border-radius: 2px;
+  }
+  .badge.b-cyan { border-color: #00eeff33; color: var(--cyan); background: #00eeff08; }
+  .badge.b-red  { border-color: #ff003c33; color: #ff6b6b;    background: #ff003c08; }
+
+  .scroll-hint {
+    margin-top: 3rem;
+    color: #333;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: blink 1.5s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ── SECCIONES ── */
+  .section-wrap {
+    position: relative;
+    z-index: 5;
+  }
+
+  /* sobre mí */
+  #sobre-mi {
+    padding: 5rem 2rem;
+    border-top: 1px solid #00ff4111;
+  }
+  .about-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  .about-photo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 3px solid var(--blue);
+    box-shadow: 0 0 20px #00aaff44;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .about-text h2 {
+    color: var(--blue);
+    font-family: 'VT323', monospace;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+  }
+  .about-text p {
+    color: #888;
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 480px;
+  }
+
+  /* slider iconos */
+  .slider-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+    background: rgba(0,0,0,0.6);
+    border-top: 1px solid #00ff4111;
+    border-bottom: 1px solid #00ff4111;
+  }
+  .slider {
+    display: flex;
+    gap: 50px;
+    animation: scroll-icons 18s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .icon-slide {
+    width: 60px;
+    height: 60px;
+    filter: invert(1) opacity(0.6);
+    transition: filter 0.3s, transform 0.3s;
+  }
+  .icon-slide:hover {
+    filter: invert(1) opacity(1) drop-shadow(0 0 6px var(--green));
+    transform: scale(1.3);
+  }
+  @keyframes scroll-icons {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* cards grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: #00ff4111;
+    border-top: 1px solid #00ff4111;
+  }
+  .card {
+    background: #000;
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+    text-align: left;
+  }
+  .card:hover { background: #00ff4108; }
+  .card-num {
+    font-family: 'VT323', monospace;
+    font-size: 3rem;
+    color: #00ff4122;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .card h3 {
+    color: var(--green);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .card p { color: #555; font-size: 13px; line-height: 1.8; }
+  .card a { color: var(--cyan); font-size: 11px; text-decoration: none; display: inline-block; margin-top: 1rem; border-bottom: 1px solid #00eeff33; }
+  .card a:hover { color: #fff; }
+
+  /* skills */
+  #skills {
+    padding: 4rem 2rem;
+    border-top: 1px solid #00ff4111;
+  }
+  .section-title {
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    color: #333;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .skills-list { max-width: 600px; margin: 0 auto; }
+  .skill-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .skill-label {
+    color: #555;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    width: 140px;
+    flex-shrink: 0;
+  }
+  .skill-track {
+    flex: 1;
+    height: 1px;
+    background: #111;
+    position: relative;
+  }
+  .skill-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--cyan));
+    position: relative;
+  }
+  .skill-fill::after {
+    content: '';
+    position: absolute;
+    right: -4px; top: -4px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+  }
+  .skill-pct {
+    color: var(--green);
+    font-size: 11px;
+    width: 36px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* retro */
+  #retro {
+    padding: 4rem 2rem;
+    border-top: 1px solid #ff003c11;
+    text-align: center;
+  }
+  #retro .section-title { color: #ff003c44; }
+  #retro p { color: #444; font-size: 13px; line-height: 1.8; max-width: 560px; margin: 0 auto 2rem; }
+  .retro-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .chip {
+    padding: 6px 16px;
+    border: 1px solid #ff003c22;
+    color: #ff6b6b;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: #ff003c08;
+    border-radius: 2px;
+  }
+  .yt-cta {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 10px 28px;
+    border: 1px solid #ff003c44;
+    color: #ff6b6b;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .yt-cta:hover {
+    background: #ff003c11;
+    border-color: #ff003c;
+    color: #fff;
+  }
+
+  /* strudel */
+  #strudel {
+    padding: 4rem 2rem;
+    border-top: 1px solid #00aaff11;
+    text-align: center;
+  }
+  #strudel .section-title { color: #00aaff44; }
+  .video-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #00aaff22;
+    box-shadow: 0 0 30px #00aaff11;
+  }
+  .video-wrap video { width: 100%; display: block; }
+  .code-snippet {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--green);
+    margin-top: 1.5rem;
+    opacity: 0.6;
+  }
+
+  /* footer */
+  footer {
+    position: relative;
+    z-index: 5;
+    padding: 3rem 2rem;
+    border-top: 1px solid #00ff4111;
+    text-align: center;
+  }
+  footer p { color: #222; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; }
+  footer span { color: #00ff4144; }
+  .social-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; }
+  .social-links a {
+    color: #333;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .social-links a:hover { color: var(--green); }
+
+  /* responsive */
+  @media (max-width: 600px) {
+    nav { gap: 1rem; flex-wrap: wrap; font-size: 10px; }
+    .about-grid { flex-direction: column; text-align: center; }
+    .card { padding: 1.5rem; }
+  }
+</style>
 </head>
 <body>
-    <!-- Lluvia de código griego desde el inicio de la página -->
-    <canvas id="matrixCanvas"></canvas>
-    <script src="matrix.js"></script>
 
-    <!-- Navegación con icono de mano -->
-    <nav>
-        <ul>
-            <li><span class="hand-icon">👋</span> <a href="#sobre-mi" class="nav-link">Sobre Mí</a></li>
-            <li><a href="#docencia" class="nav-link">Docencia</a></li>
-            <li><a href="#programacion" class="nav-link">Programación</a></li>
-            <li><a href="#ciberseguridad" class="nav-link">Ciberseguridad</a></li>
-            <li><a href="#strudel" class="nav-link">Strudel</a></li>
-        </ul>
-    </nav>
+<!-- CANVAS fondo estrellas -->
+<canvas id="starsCanvas"></canvas>
+<!-- CANVAS matrix -->
+<canvas id="matrixCanvas"></canvas>
 
-    <!-- "V411UX" en Azul con efecto -->
-    <div id="intro">
-        <h1 class="vallux-title">V411UX</h1>
+<!-- NAV -->
+<nav>
+  <ul style="list-style:none;display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;">
+    <li><span class="hand-icon">👋</span> <a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#docencia">Docencia</a></li>
+    <li><a href="#programacion">Programación</a></li>
+    <li><a href="#ciberseguridad">Ciberseguridad</a></li>
+    <li><a href="#retro">Retro</a></li>
+    <li><a href="#strudel">Strudel</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="glitch-title">V411UX</div>
+  <div class="tagline">
+    Electromecánico · <em>ASIX</em> · Ciberseguridad · <em>Retro</em>
+  </div>
+
+  <div class="profile-wrap">
+    <img src="profile.jpg" alt="Sergio Vallugera">
+  </div>
+
+  <div class="badges">
+    <span class="badge">Electromecánica</span>
+    <span class="badge b-cyan">ASIX</span>
+    <span class="badge b-red">Máster Ciberseguridad UOC</span>
+    <span class="badge">Power Automate</span>
+    <span class="badge b-cyan">Power BI</span>
+    <span class="badge">Docker</span>
+    <span class="badge b-red">Kali Linux</span>
+    <span class="badge">Python</span>
+    <span class="badge b-cyan">Bash</span>
+    <span class="badge">Snort</span>
+  </div>
+
+  <div class="scroll-hint">▼ scroll ▼</div>
+</section>
+
+<!-- SOBRE MÍ -->
+<section id="sobre-mi" class="section-wrap">
+  <div id="sobre-mi" style="padding:5rem 2rem; border-top:1px solid #00ff4111;">
+    <div class="about-grid">
+      <img src="profile.jpg" alt="Sergio Vallugera" class="about-photo">
+      <div class="about-text">
+        <h2>Sobre mí</h2>
+        <p>Electromecánico de base, técnico ASIX, y actualmente finalizando el Máster en Ciberseguridad en la UOC. Apasionado por la tecnología desde los tiempos del Commodore 64.</p>
+        <p style="margin-top:1rem;">Especializado en automatización con Power Automate y Power BI, administración de sistemas Linux, Docker y seguridad de redes.</p>
+      </div>
     </div>
+  </div>
+</section>
 
-    <!-- Sección Presentación con foto a la izquierda -->
-    <section id="sobre-mi" class="section">
-        <div class="content">
-            <img src="profile.jpg" alt="Foto de Sergio Vallugera" class="profile-pic">
-            <div class="text">
-                <h2>Sobre Mí</h2>
-                <p>Administrador de Sistemas y Redes | Ingeniero Informático</p>
-                <p>Apasionado por la ciberseguridad, la tecnología y la innovación.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Slider de Iconos (justo debajo de la presentación) -->
-    <div class="slider-container">
-        <div class="slider">
-            <a href="#"><img src="icons/bash-svgrepo-com.svg" alt="Bash" class="icon-slide"></a>
-            <a href="#"><img src="icons/java-svgrepo-com.svg" alt="Java" class="icon-slide"></a>
-            <a href="#"><img src="icons/kalilinux-svgrepo-com.svg" alt="Kali Linux" class="icon-slide"></a>
-            <a href="#"><img src="icons/docker-svgrepo-com.svg" alt="Docker" class="icon-slide"></a>
-            <a href="#"><img src="icons/python-svgrepo-com.svg" alt="Python" class="icon-slide"></a>
-            <a href="#"><img src="icons/PowerAutomate_scalable.svg" alt="Power Automate" class="icon-slide"></a>
-            <a href="#"><img src="icons/PowerBI_scalable.svg" alt="Power BI" class="icon-slide"></a>
-            <a href="#"><img src="icons/microsoft-svgrepo-com.svg" alt="Microsoft" class="icon-slide"></a>
-            <a href="#"><img src="icons/linux-svgrepo-com.svg" alt="Linux" class="icon-slide"></a>
-        </div>
-    </div>
-
-    <!-- Video de fondo colocado después del slider -->
-    <video autoplay loop muted playsinline id="bg-video">
-        <source src="presentacion.mp4" type="video/mp4">
-        Tu navegador no soporta videos en HTML5.
-    </video>
-
-    <!-- Secciones con los globos flotando sobre el video -->
-    <div class="content-wrapper">
-        <section id="docencia" class="section bubble">
-            <h2>Docencia</h2>
-            <p>He desarrollado materiales y guías para la formación en sistemas, redes y ciberseguridad.</p>
-        </section>
-    
-        <section id="programacion" class="section bubble">
-            <h2>Programación</h2>
-            <p>Especializado en automatización, desarrollo web y scripts en Python y PowerShell.</p>
-        </section>
-    
-        <section id="ciberseguridad" class="section bubble">
-            <h2>Ciberseguridad</h2>
-            <p>
-                Formación y práctica continua en ciberseguridad, con foco en detección de amenazas,
-                análisis de tráfico de red y revisión de evidencias mediante logs y alertas.
-            </p>
-
-            <h3>Trabajos y proyectos</h3>
-            <ul>
-                <li>
-                    <a href="https://raw.githubusercontent.com/vallugera/app-web-a1/main/informe-a4.md"
-                       target="_blank"
-                       rel="noopener noreferrer">
-                        Informe A4 – Cazadores de amenazas
-                    </a>
-
-                    <span style="font-size: 0.9em; opacity: 0.85;">
-                        · Snort · Rsyslog · análisis de logs · UOC
-                    </span>
-                </li>
-            </ul>
-        </section>
-
-          
-        <!-- ✅ Sección Strudel DENTRO del content-wrapper -->
-        <section id="strudel" class="section bubble" style="text-align: center; background: rgba(0, 0, 0, 0.7); color: #fff; padding: 40px 20px;">
-            <h2>🎵 Live Coding con Strudel</h2>
-            <p>Creación de música algorítmica usando código en tiempo real.</p>
-            <div style="margin: 20px auto; max-width: 800px; overflow: hidden; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.4); position: relative;">
-    <video 
-        width="100%" 
-        height="auto" 
-        controls 
-        style="max-width: 100%; height: auto; display: block; border-radius: 12px;"
-    >
-        <source src="recording.mp4" type="video/mp4">
-        Tu navegador no soporta videos HTML5.
-    </video>
+<!-- SLIDER ICONOS -->
+<div class="slider-container">
+  <div class="slider">
+    <img src="icons/bash-svgrepo-com.svg"         alt="Bash"           class="icon-slide">
+    <img src="icons/java-svgrepo-com.svg"          alt="Java"           class="icon-slide">
+    <img src="icons/kalilinux-svgrepo-com.svg"     alt="Kali Linux"     class="icon-slide">
+    <img src="icons/docker-svgrepo-com.svg"        alt="Docker"         class="icon-slide">
+    <img src="icons/python-svgrepo-com.svg"        alt="Python"         class="icon-slide">
+    <img src="icons/PowerAutomate_scalable.svg"    alt="Power Automate" class="icon-slide">
+    <img src="icons/PowerBI_scalable.svg"          alt="Power BI"       class="icon-slide">
+    <img src="icons/microsoft-svgrepo-com.svg"     alt="Microsoft"      class="icon-slide">
+    <img src="icons/linux-svgrepo-com.svg"         alt="Linux"          class="icon-slide">
+    <!-- duplicado para loop infinito -->
+    <img src="icons/bash-svgrepo-com.svg"         alt="Bash"           class="icon-slide">
+    <img src="icons/java-svgrepo-com.svg"          alt="Java"           class="icon-slide">
+    <img src="icons/kalilinux-svgrepo-com.svg"     alt="Kali Linux"     class="icon-slide">
+    <img src="icons/docker-svgrepo-com.svg"        alt="Docker"         class="icon-slide">
+    <img src="icons/python-svgrepo-com.svg"        alt="Python"         class="icon-slide">
+    <img src="icons/PowerAutomate_scalable.svg"    alt="Power Automate" class="icon-slide">
+    <img src="icons/PowerBI_scalable.svg"          alt="Power BI"       class="icon-slide">
+    <img src="icons/microsoft-svgrepo-com.svg"     alt="Microsoft"      class="icon-slide">
+    <img src="icons/linux-svgrepo-com.svg"         alt="Linux"          class="icon-slide">
+  </div>
 </div>
-            <p style="font-family: 'Courier New', monospace; font-size: 14px; margin-top: 15px;">
-                Ejemplo de código: <br>
-                <code>sound('bd sn cp').slow(4).stutter(3)</code>
-            </p>
-        </section>
-    </div>  <!-- cierra content-wrapper -->
-           
-    <script>
-        document.querySelectorAll('.nav-link').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+
+<!-- CARDS -->
+<div class="section-wrap cards-grid">
+  <div class="card" id="docencia">
+    <div class="card-num">01</div>
+    <h3>Docencia</h3>
+    <p>Materiales y guías para formación en sistemas, redes y ciberseguridad. Experiencia transmitiendo conocimiento técnico de forma clara.</p>
+  </div>
+  <div class="card" id="programacion">
+    <div class="card-num">02</div>
+    <h3>Programación</h3>
+    <p>Automatización con Power Automate, scripts en Python y Bash, desarrollo web. Soluciones que eliminan tareas repetitivas.</p>
+  </div>
+  <div class="card" id="ciberseguridad">
+    <div class="card-num">03</div>
+    <h3>Ciberseguridad</h3>
+    <p>Detección de amenazas, análisis de tráfico, Snort, Rsyslog, revisión de logs. Formación continua en el Máster UOC.</p>
+    <a href="https://raw.githubusercontent.com/vallugera/app-web-a1/main/informe-a4.md" target="_blank" rel="noopener">→ Informe A4 – Cazadores de amenazas</a>
+  </div>
+  <div class="card">
+    <div class="card-num">04</div>
+    <h3>Automatización</h3>
+    <p>Power Automate, Power BI y Docker en entornos empresariales. Sistemas que trabajan solos mientras tú descansas.</p>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills" class="section-wrap">
+  <div class="section-title">// skills</div>
+  <div class="skills-list">
+    <div class="skill-row">
+      <span class="skill-label">Electromecánica</span>
+      <div class="skill-track"><div class="skill-fill" style="width:95%"></div></div>
+      <span class="skill-pct">95%</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-label">Linux / Bash</span>
+      <div class="skill-track"><div class="skill-fill" style="width:88%"></div></div>
+      <span class="skill-pct">88%</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-label">Ciberseguridad</span>
+      <div class="skill-track"><div class="skill-fill" style="width:82%"></div></div>
+      <span class="skill-pct">82%</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-label">Power Automate</span>
+      <div class="skill-track"><div class="skill-fill" style="width:75%"></div></div>
+      <span class="skill-pct">75%</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-label">Python</span>
+      <div class="skill-track"><div class="skill-fill" style="width:70%"></div></div>
+      <span class="skill-pct">70%</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-label">Docker</span>
+      <div class="skill-track"><div class="skill-fill" style="width:65%"></div></div>
+      <span class="skill-pct">65%</span>
+    </div>
+  </div>
+</section>
+
+<!-- RETRO -->
+<section id="retro" class="section-wrap">
+  <div class="section-title">// retro computing</div>
+  <p style="color:#444;font-size:13px;line-height:1.8;max-width:560px;margin:0 auto 2rem;">
+    Canal de YouTube dedicado a la informática retro. Commodore 64, Amstrad CPC, ZX Spectrum. Para todos los que empezaron con una cinta de cassette y un televisor.
+  </p>
+  <div class="retro-chips">
+    <span class="chip">Commodore 64</span>
+    <span class="chip">Amstrad CPC</span>
+    <span class="chip">ZX Spectrum</span>
+    <span class="chip">MSX</span>
+    <span class="chip">BASIC</span>
+    <span class="chip">Tape Loading</span>
+    <span class="chip">8-bit</span>
+    <span class="chip">SID chip</span>
+  </div>
+  <br>
+  <a href="#" class="yt-cta">▶ Próximamente en YouTube</a>
+</section>
+
+<!-- STRUDEL -->
+<section id="strudel" class="section-wrap">
+  <div class="section-title">// live coding · strudel</div>
+  <div class="video-wrap">
+    <video controls>
+      <source src="recording.mp4" type="video/mp4">
+    </video>
+  </div>
+  <p class="code-snippet">sound('bd sn cp').slow(4).stutter(3)</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="social-links">
+    <a href="https://linkedin.com/in/sergio-vallugera" target="_blank">LinkedIn</a>
+    <a href="https://github.com/V411UX" target="_blank">GitHub</a>
+    <a href="#">YouTube</a>
+  </div>
+  <p>V411UX · Sergio Vallugera · <span>[ SYSTEM ONLINE ]</span></p>
+</footer>
+
+<!-- ── SCRIPTS ── -->
+<script>
+// ESTRELLAS
+(function(){
+  const c = document.getElementById('starsCanvas');
+  const ctx = c.getContext('2d');
+  let W, H, stars = [];
+  function init(){
+    W = c.width = window.innerWidth;
+    H = c.height = window.innerHeight;
+    stars = Array.from({length:180}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      r: Math.random()*1.4 + 0.2,
+      o: Math.random(), s: Math.random()*0.4+0.1
+    }));
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s => {
+      s.o += s.s * 0.008;
+      const op = (Math.sin(s.o)+1)/2 * 0.7;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${op})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+// MATRIX
+(function(){
+  const c = document.getElementById('matrixCanvas');
+  const ctx = c.getContext('2d');
+  let W, H, drops = [];
+  const chars = 'アイウエオカキクケコサシスセソ01001101V411UX'.split('');
+  function init(){
+    W = c.width = window.innerWidth;
+    H = c.height = window.innerHeight;
+    drops = Array(Math.floor(W/16)).fill(0);
+  }
+  function draw(){
+    ctx.fillStyle = 'rgba(0,0,0,0.05)';
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle = '#00ff41';
+    ctx.font = '14px monospace';
+    drops.forEach((y,i) => {
+      ctx.fillText(chars[Math.floor(Math.random()*chars.length)], i*16, y*16);
+      if(y*16 > H && Math.random() > 0.975) drops[i] = 0;
+      else drops[i]++;
+    });
+    setTimeout(draw, 55);
+  }
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+// SCROLL SUAVE
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+</script>
+
 </body>
 </html>
